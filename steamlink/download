@@ -36,7 +36,7 @@ download_steamlink() {
         
         echo "Downloading package from: $PACKAGE_URL"
         
-        wget "$PACKAGE_URL" -O steamlink-package.tar.gz || { echo "Error: Download failed."; exit 1; }
+        wget "$PACKAGE_URL" -O steamlink-package.tar.gz || { echo "Error: Download failed."; rm -rf "$GAMEDIR/bin" && exit 1; }
         
         echo "Download complete!"
         

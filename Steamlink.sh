@@ -19,14 +19,9 @@ source $controlfolder/control.txt
 # Variables
 GAMEDIR="/$directory/ports/steamlink"
 
-# CD and set permissions
+# CD and set log
 cd $GAMEDIR
 > "$GAMEDIR/log.txt" && exec > >(tee "$GAMEDIR/log.txt") 2>&1
-
-# Exports
-export LD_PRELOAD="$GAMEDIR/libs.${DEVICE_ARCH}/libgpucompat.so" 
-export SDL_VIDEO_DRIVER="x11"
-export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
 # Check if we need to download Steamlink
 if [ "$DEVICE_ARCH" == "aarch64" ]; then
@@ -55,8 +50,19 @@ fi
 
 # Exports post-setup
 QT_VERSION=$(ls -d $GAMEDIR/Qt-* 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n1)
-export LD_LIBRARY_PATH="$GAMEDIR/libs.${DEVICE_ARCH}:$GAMEDIR/Qt-${QT_VERSION}/lib:${LIBARCH}compat:$LD_LIBRARY_PATH"
-export QT_PLUGIN_PATH="$GAMEDIR/$QT_VERSION/plugins"
+export LD_LIBRARY_PATH="$GAMEDIR/libs.${DEVICE_ARCH}:$GAMEDIR/libs.${DEVICE_ARCH}/shell:$GAMEDIR/Qt-${QT_VERSION}/lib:${LIBARCH}compat:$LD_LIBRARY_PATH"
+export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
+export LD_PRELOAD="$GAMEDIR/libs.${DEVICE_ARCH}/libgpucompat.so"
+export QT_QPA_PLATFORM_PLUGIN_PATH="$GAMEDIR/Qt-${QT_VERSION}/plugins"
+
+# Query the display manager
+if [ -n "$DISPLAY" ] && command -v xdpyinfo >/dev/null 2>&1 && xdpyinfo >/dev/null 2>&1 || [ -n "$SWAYSOCK" ]; then
+    export SDL_VIDEODRIVER="x11"
+    export QT_QPA_PLATFORM="xcb"
+else
+    export SDL_VIDEODRIVER="kmsdrm"
+    export QT_QPA_PLATFORM="linuxfb:nographicmodeswitch:tty=/dev/tty1"
+fi
 
 # Assign gptokeyb and load the game
 $GPTOKEYB "shell.${DEVICE_ARCH}" -c "steamlink.gptk" & 

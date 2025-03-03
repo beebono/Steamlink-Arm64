@@ -7,7 +7,7 @@ Don't have wget or curl? Go here: http://cdn.origin.steamstatic.com/steamlink/rp
 - Extract folder `Qt-x.xx.x/` to `ports/steamlink/`
 
 ## Disclaimers
-This distribution is intended for Rocknix/Batocera for the Retroid Pocket 5 and Retroid Pocket Mini.
+SteamLink requires a display manager to set up its overlay and steam. You can get the application to boot and adjust some settings, but it won't work on kmsdrm yet. Please use Panfrost if available.
 
 ## Thanks
 A million thanks to Noxwell for their work on this, where the previous version of this wrapper was not functioning.

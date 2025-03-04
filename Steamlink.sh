@@ -14,7 +14,7 @@ fi
 
 source $controlfolder/control.txt
 [ -f "${controlfolder}/mod_${CFW_NAME}.txt" ] && source "${controlfolder}/mod_${CFW_NAME}.txt"
-#get_controls
+get_controls
 
 # Variables
 GAMEDIR="/$directory/ports/steamlink"

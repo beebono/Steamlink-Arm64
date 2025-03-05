@@ -14,7 +14,7 @@
     ],
     "desc": "Steam Link is a hardware and software product developed by Valve Corporation for streaming Steam content from a personal computer or Steam Machine wirelessly to a mobile device or other monitor.",
     "desc_md": null,
-    "inst": "This SteamLink wrapper automatically checks for a SteamLink binary and, if one is found, it checks a `version.txt` file and compares the contents to the latest available. If there is no `version.txt` file or there is a new version, SteamLink is downloaded automatically with wget.\n\nDon't have wget or curl? Go here: http://cdn.origin.steamstatic.com/steamlink/rpi/bookworm/arm64/public_build.txt and use the URL from that file to download the latest SteamLink binary. Extract the `bin/shell` file to `steamlink/bin`.",
+    "inst": "This SteamLink wrapper automatically checks for a SteamLink binary and, if one is found, it checks a `version.txt` file and compares the contents to the latest available. If there is no `version.txt` file or there is a new version, SteamLink is downloaded automatically with wget.\n\nDon't have wget or curl? See the README.md file for manual installation steps.",
     "inst_md": null,
     "genres": [
       "other"
@@ -25,7 +25,9 @@
     "runtime": [],
     "store": [],
     "availability": "full",
-    "reqs": ["opengl"],
+    "reqs": [
+      "opengl"
+    ],
     "arch": [
       "aarch64"
     ],

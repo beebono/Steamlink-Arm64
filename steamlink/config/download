@@ -85,6 +85,21 @@ download_steamlink() {
                 echo "Extracting $QT_PATH folder..."
                 $TAR -xzf steamlink-package.tar.gz -C "$GAMEDIR/" --strip-components=1 $(tar -tzf steamlink-package.tar.gz | grep "^${QT_PATH}")
                 extracted_files+=("$GAMEDIR/$QT_PATH")
+                
+                # Remove all symlinks in the extracted folder
+                QT_NEW=$(echo "$QT_PATH" | sed 's|^steamlink/||')
+                find "$GAMEDIR/$QT_NEW" -type l -exec rm {} \;
+                echo "Symlinks removed from $GAMEDIR/$QT_PATH"
+                
+                # Trim version numbers from file names (e.g., libQt5Core.so.5.14.1 -> libQt5Core.so.5)
+                find "$GAMEDIR/$QT_NEW" -type f | while read -r file; do
+                    new_name=$(echo "$file" | sed -E 's/(.*\.so\.[0-9]+)(\.[0-9]+){1,2}$/\1/')
+                    if [[ "$file" != "$new_name" ]]; then
+                        echo "Renaming $file to $new_name"
+                        mv "$file" "$new_name"
+                    fi
+                done
+    
                 rm -rf steamlink-package.tar.gz
                 echo "Patching process complete!"
             else

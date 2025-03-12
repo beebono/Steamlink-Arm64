@@ -9,5 +9,7 @@ Don't have wget or curl? Go here: http://cdn.origin.steamstatic.com/steamlink/rp
 ## Disclaimers
 SteamLink requires a display manager to set up its overlay and stream. You can get the application to boot and adjust some settings, but it won't work on kmsdrm yet. Please use Panfrost if available.
 
+The MIT License in this repository only applies to files included within and does not apply to SteamLink or its included dependencies.
+
 ## Thanks
 A million thanks to [Noxwell](https://github.com/beebono/SLink-RPCompat) for their work on this, where the previous version of this wrapper was not functioning.

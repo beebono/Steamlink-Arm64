@@ -14,10 +14,10 @@ The MIT License in this repository only applies to files included within and doe
 ## Device Verification
 Steam Link has been tested to work on the following devices thus far:
 
-[x] - Powkiddy x55
-[x] - Retroid Pocket Mini
-[x] - Retroid Pocket 5
-[x] - Ayn Odin 2
+[x] - Powkiddy x55  
+[x] - Retroid Pocket Mini  
+[x] - Retroid Pocket 5  
+[x] - Ayn Odin 2  
 
 ## Thanks
 A million thanks to [Noxwell](https://github.com/beebono/SLink-RPCompat) for their work on this, where the previous version of this wrapper was not functioning.

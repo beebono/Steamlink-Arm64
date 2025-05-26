@@ -104,17 +104,7 @@ game_executable="./"bin/shell.${DEVICE_ARCH}""
 export QT_QPA_PLATFORM="eglfs"
 export SDL_VIDEO_DRIVER="x11"
 export SDL_VIDEO_FORCE_EGL="1"
-
-# Get screen resolution for libhandecoder
-hdcd_res="unknown"
-if command -v wlr-randr >/dev/null 2>&1; then
-    hdcd_res=$(wlr-randr | grep current | grep -o '[0-9]\+x[0-9]\+')
-elif command -v xrandr >/dev/null 2>&1; then
-    hdcd_res=$(xrandr | grep '*' | head -n1 | awk '{print $1}')
-elif command -v fbset >/dev/null 2>&1; then
-    hdcd_res=$(fbset -s | awk '/geometry/ {print $2 "x" $3}')
-fi
-export HDCD_RESOLUTION=$hdcd_res
+export HDCD_RESOLUTION="${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}"
 
 # Start the game
 pm_platform_helper "$GAMEDIR/bin/shell.${DEVICE_ARCH} " >/dev/null
